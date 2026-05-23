@@ -1,0 +1,6 @@
+{
+  "name": "ЦСД — Бюро переводов",
+  "description": "Премиальное бюро переводов технической, научной и бизнес-документации больших объемов.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
