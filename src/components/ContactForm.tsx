@@ -146,7 +146,7 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <div className="text-[10px] font-mono text-slate-500 uppercase">МНОГОКАНАЛЬНЫЙ ТЕЛЕФОН</div>
-                    <div className="text-sm font-semibold">+7 (499) 393-42-17</div>
+                    <div className="text-sm font-semibold">+7 (910) 429-50-35</div>
                   </div>
                 </a>
 

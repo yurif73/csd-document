@@ -13,10 +13,9 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   const [details, setDetails] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   if (!isOpen) return null;
-
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
