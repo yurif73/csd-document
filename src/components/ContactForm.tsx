@@ -49,7 +49,10 @@ export default function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          agreeToNda: formData.agreeToNda ? 'on' : ''
+        }),
       });
       
       const result = await response.json();
@@ -140,7 +143,7 @@ export default function ContactForm() {
                   </div>
                 </a>
 
-                <a href="tel:+74993934217" className="flex items-center gap-4 text-slate-300 hover:text-cyan-400 transition-colors group">
+                <a href="tel:+79104295035" className="flex items-center gap-4 text-slate-300 hover:text-cyan-400 transition-colors group">
                   <div className="w-10 h-10 rounded-lg bg-slate-900 border border-white/5 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-950 group-hover:border-cyan-400/20 transition-all">
                     <Phone className="w-5 h-5" />
                   </div>
@@ -329,7 +332,8 @@ export default function ContactForm() {
                         required
                       />
                       <label htmlFor="agreeToNda" className="text-xs text-slate-400 cursor-pointer select-none leading-relaxed">
-                        Я согласен на обработку персональных данных. Мы обеспечиваем конфиденциальность предоставляемых данных в соответствии с законодательством РФ.
+                        Отправляя форму на сайте https://csd-document.ru/, я подтверждаю, что ознакомлен(а) с Политикой в отношении обработки персональных данных ООО «ЦСД», и даю ООО «ЦСД» согласие на обработку моих персональных данных, указанных в форме обращения, а именно: фамилии, имени, отчества (полностью или частично, либо иного указанного обращения), наименования организации, номера телефона и адреса электронной почты, в целях рассмотрения обращения, подготовки коммерческого предложения, оценки стоимости услуг, заключения и исполнения договора.
+                        Я также подтверждаю, что предоставленные мной данные являются достоверными, а согласие действует с момента отправки формы до достижения целей обработки либо до момента его отзыва путём направления обращения на адрес электронной почты: info@csd-document.ru
                       </label>
                     </div>
 

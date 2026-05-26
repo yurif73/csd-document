@@ -14,6 +14,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [agreeToNda, setAgreeToNda] = useState(true);
 
   if (!isOpen) return null;
 
@@ -28,7 +29,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, phone, details }),
+        body: JSON.stringify({ name, email, phone, details, agreeToNda: agreeToNda ? 'on' : '' }),
       });
       
       const result = await response.json();
@@ -39,6 +40,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
         setEmail('');
         setPhone('');
         setDetails('');
+        setAgreeToNda(true);
       } else {
         setErrorMsg(result.message || 'Произошла ошибка при обработке на сервере.');
       }
@@ -51,6 +53,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
       setEmail('');
       setPhone('');
       setDetails('');
+      setAgreeToNda(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -158,11 +161,20 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
               </div>
             </div>
 
-            <div className="flex items-center gap-2 bg-slate-900/60 p-3 rounded-lg border border-cyan-400/10">
-              <Lock className="w-4 h-4 text-cyan-400 shrink-0" />
-              <p className="text-[10.5px] text-slate-300 font-light leading-normal">
-                Гарантируем конфиденциальность. Данные передаются исключительно для обработки в рамках ООО «ЦСД».
-              </p>
+            <div className="flex items-start gap-3">
+              <input 
+                type="checkbox" 
+                id="agreeToNdaModal"
+                name="agreeToNda"
+                checked={agreeToNda}
+                onChange={(e) => setAgreeToNda(e.target.checked)}
+                className="w-4 h-4 accent-cyan-400 rounded bg-slate-950 border-white/11 cursor-pointer mt-0.5"
+                required
+              />
+              <label htmlFor="agreeToNdaModal" className="text-xs text-slate-400 cursor-pointer select-none leading-relaxed">
+                Отправляя форму на сайте https://csd-document.ru/, я подтверждаю, что ознакомлен(а) с Политикой в отношении обработки персональных данных ООО «ЦСД», и даю ООО «ЦСД» согласие на обработку моих персональных данных, указанных в форме обращения, а именно: фамилии, имени, отчества (полностью или частично, либо иного указанного обращения), наименования организации, номера телефона и адреса электронной почты, в целях рассмотрения обращения, подготовки коммерческого предложения, оценки стоимости услуг, заключения и исполнения договора.
+                Я также подтверждаю, что предоставленные мной данные являются достоверными, а согласие действует с момента отправки формы до достижения целей обработки либо до момента его отзыва путём направления обращения на адрес электронной почты: info@csd-document.ru
+              </label>
             </div>
 
             {errorMsg && (
